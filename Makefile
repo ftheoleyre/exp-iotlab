@@ -308,11 +308,11 @@ openwsn/openwsn-fw-sink/projects/common/${OPENWSN_PROG}:
 
 build-openwsn-m3: ensure-openwsn-build-deps
 	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw \
-        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN}
+        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=0 apps=cexample oos_openwsn
 
 build-openwsn-sink-m3: ensure-openwsn-build-deps
 	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw-sink \
-        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=1
+        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=1 apps=cexample oos_openwsn
 
 build-openwsn-a8-m3: ensure-openwsn-build-deps # not working
 

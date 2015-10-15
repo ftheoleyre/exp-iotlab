@@ -60,8 +60,8 @@ GIT_FOREN6=https://github.com/cetic/foren6.git
 # Repositories from OpenWSN
 #--------------------------------------------------
 
-GIT_OPENWSN_FW=https://github.com/openwsn-berkeley/openwsn-fw 
-GIT_OPENWSN_SW=https://github.com/openwsn-berkeley/openwsn-sw
+GIT_OPENWSN_FW=https://github.com/ftheoleyre/openwsn-fw 
+GIT_OPENWSN_SW=https://github.com/ftheoleyre/openwsn-sw
 GIT_OPENWSN_COAP=https://github.com/openwsn-berkeley/coap
 
 #--------------------------------------------------
