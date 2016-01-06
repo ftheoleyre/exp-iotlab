@@ -309,9 +309,9 @@ TypeToFirmware = {
         "../riot/RIOT-viz/examples/rpl_udp/bin/iot-lab_M3/rpl_udp.elf",
         #"../riot/RIOT/examples/default/bin/iot-lab_M3/default.elf",
     "openwsn":
-        "../openwsn/openwsn-fw/projects/common/"+DefaultFirmeware,
+        "../openwsn/openwsn-fw/build/iot-lab_M3_armgcc/projects/common/"+DefaultFirmeware,
     "openwsn-sink":
-        "../openwsn/openwsn-fw-sink/projects/common/"+DefaultFirmeware,
+        "../openwsn/openwsn-fw-sink/build/iot-lab_M3_armgcc/projects/common/"+DefaultFirmeware,
     "opera":
         "/home/user/HgRep/exp-iotlab-opera/WSNColor-iotlab/contiki/z1/contiki-opera.iotlab-m3",
     "opera-sink":
@@ -436,6 +436,7 @@ class IotlabPersistentExp(IotlabExp):
                     "Inconsistent firmware",
                     (nodeTypeName, nodeTypeInfo["firmware"], firmwareFileName))
         else: nodeTypeInfo["firmware"] = firmwareFileName
+ 
             
         nodeTypeInfo["nodes"].extend(nodeList)
         assert nodeTypeInfo["firmware"] == firmwareFileName
@@ -767,13 +768,13 @@ def ensureExperimentFromArgs(args):
         print ("- No experience, starting one")
         exp = iotlab.startExp(args.name, args.duration, args.site, args.nbNodes)
     else:
-        print ("- Re-using already running experiment")
-        exp = expList[0]
+        print ("- Re-using already running experiment (the last one)")
+        exp = expList[len(expList)-1]
 
     print ("  experiment id=%s" % (exp.expId))
     global TypeToFirmware
-    TypeToFirmware["openwsn"] = "../openwsn/openwsn-fw/projects/common/"+args.firmeware
-    TypeToFirmware["openwsn-sink"] = "../openwsn/openwsn-fw-sink/projects/common/"+args.firmeware
+    TypeToFirmware["openwsn"] = "../openwsn/openwsn-fw/build/iot-lab_M3_armgcc/projects/common/"+args.firmeware
+    TypeToFirmware["openwsn-sink"] = "../openwsn/openwsn-fw-sink/build/iot-lab_M3_armgcc/projects/common/"+args.firmeware
     exp.waitUntilRunning(verbose=True)
     return iotlab, exp
 

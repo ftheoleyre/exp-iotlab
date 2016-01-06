@@ -37,7 +37,7 @@ BorderRouterPriorityList = [349,348,346,344,342,339]
 currentNodeList = IotlabHelper.sortNodeByPriority(
     currentNodeList, BorderRouterPriorityList)
 
-OpenWSNRouterFwFileName = "../openwsn/openwsn-fw-sink/projects/common/"+args.firmeware
+OpenWSNRouterFwFileName = "../openwsn/openwsn-fw-sink/build/iot-lab_M3_armgcc/projects/common/"+args.firmeware
 
 borderRouterList, currentNodeList = exp.ensureFlashedNodes(
     "openwsn-sink", OpenWSNRouterFwFileName, 1, currentNodeList)
