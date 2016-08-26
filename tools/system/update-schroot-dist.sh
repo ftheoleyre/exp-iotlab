@@ -69,5 +69,7 @@ python get-pip.py )
 
 pip install PyDispatcher
 pip install 'requests<=1.2.3'
+pip install zmq 
+pip install yappi
 
 #---------------------------------------------------------------------------
