@@ -309,14 +309,14 @@ openwsn/openwsn-fw-sink/projects/common/${OPENWSN_PROG}:
 #test
 build-openwsn-m3-test: ensure-openwsn-build-deps
 	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw \
-        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=0 apps=cexample printf=1 tracks=3 oos_openwsn
+        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=0 apps=cexample printf=1 tracks=0 sf=2 oos_openwsn
 # default options
 #        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=0 apps=cexample distribshared=1 tracks=2 cex_period=10000 oos_openwsn
 
 build-openwsn-sink-m3-test: ensure-openwsn-build-deps
 	echo ${TOTO}
 	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw-sink \
-        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=1 apps=cexample printf=1 tracks=3 oos_openwsn
+        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=1 apps=cexample printf=1 tracks=0 sf=2 oos_openwsn
 
 #openwsn with configurable options
 build-openwsn-m3: ensure-openwsn-build-deps
