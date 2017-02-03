@@ -286,9 +286,15 @@ ensure-openwsn-build-deps: ensure-all-openwsn ensure-gcc-arm \
 
 build-all-openwsn: build-openwsn-m3 build-openwsn-sink-m3 build-openwsn-sim
 
+#OPTIONS 
+OPENWSN_PREOPT_SIM = board=python toolchain=gcc 
+OPENWSN_PREOPT_EXP = board=iot-lab_M3 toolchain=armgcc 
+OPENWSN_OPTIONS = printf=1 tracks=0 sf=1 schedalgo=1 cex_period=3000 oos_openwsn
+
+
 build-openwsn-sim: ensure-openwsn-build-deps
 	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw \
-        && scons board=python toolchain=gcc oos_openwsn
+        && scons ${OPENWSN_PREOPT_SIM} ${OPENWSN} dagroot=0 ${OPENWSN_OPTIONS} 
 
 OPENWSN_SIM_OBJ=openwsn/openwsn-fw/firmware/openos/projects/common/oos_openwsn.so
 ensure-openwsn-sim: ${OPENWSN_SIM_OBJ}
@@ -306,31 +312,15 @@ openwsn/openwsn-fw/projects/common/${OPENWSN_PROG}:
 openwsn/openwsn-fw-sink/projects/common/${OPENWSN_PROG}:
 	make build-openwsn-sink-m3
 
-#test
-build-openwsn-m3-test: ensure-openwsn-build-deps
-	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw \
-        && scons board=python toolchain=gcc ${OPENWSN} dagroot=0 printf=1 tracks=3 sf=2 schedalgo=2 cex_period=3000 oos_openwsn
-#        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=0 apps=cexample printf=1 tracks=3 sf=2 schedalgo=2 cex_period=3000 oos_openwsn
-# default options
-#        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=0 apps=cexample distribshared=1 tracks=2 cex_period=10000 oos_openwsn
 
-build-openwsn-sink-m3-test: ensure-openwsn-build-deps
-	echo ${TOTO}
-	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw-sink \
-        && scons board=python toolchain=gcc ${OPENWSN} dagroot=1 printf=1 tracks=3 sf=2 schedalgo=2 cex_period=3000 oos_openwsn
-#        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=1 apps=cexample printf=1 tracks=3 sf=2 schedalgo=2 cex_period=3000 oos_openwsn
-#openwsn with configurable options
+#default
 build-openwsn-m3: ensure-openwsn-build-deps
-	
-
 	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw \
-        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=0 apps=cexample ${OPTIONS} oos_openwsn
+        && scons ${OPENWSN_PREOPT_EXP} ${OPENWSN} dagroot=0 ${OPENWSN_OPTIONS} 
 
 build-openwsn-sink-m3: ensure-openwsn-build-deps
-	echo ${TOTO}
 	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw-sink \
-        && scons board=iot-lab_M3 toolchain=armgcc ${OPENWSN} dagroot=1 apps=cexample ${OPTIONS} oos_openwsn
-
+        && scons ${OPENWSN_PREOPT_EXP} ${OPENWSN} dagroot=1 ${OPENWSN_OPTIONS} 
 
 
 build-openwsn-a8-m3: ensure-openwsn-build-deps # not working
@@ -340,8 +330,6 @@ run-openwsn-sim: ensure-openwsn-sim ensure-openwsn-build-deps
 
 run-openwsn-web: ensure-openwsn-build-deps
 	cd openwsn/openwsn-sw/software/openvisualizer && sudo scons runweb
-	#cd openwsn/openwsn-sw/software/openvisualizer/bin/openVisualizerApp \
-	#&& sudo python openVisualizerWeb.py --iotlabmotes m3-6,m3-8,m3-60,m3-62,m3-64
 
 
 #===========================================================================
