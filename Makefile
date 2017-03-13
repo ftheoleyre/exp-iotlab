@@ -289,7 +289,7 @@ build-all-openwsn: build-openwsn-m3 build-openwsn-sink-m3 build-openwsn-sim
 #OPTIONS 
 OPENWSN_PREOPT_SIM = board=python toolchain=gcc 
 OPENWSN_PREOPT_EXP = board=iot-lab_M3 toolchain=armgcc 
-OPENWSN_OPTIONS = printf=1 tracks=2 sf=2 schedalgo=1 cex_period=3000 oos_openwsn
+OPENWSN_OPTIONS = printf=1 tracks=2 sf=2 schedalgo=1 cex_period=3000 apps=cexample oos_openwsn
 
 
 build-openwsn-sim: ensure-openwsn-build-deps
