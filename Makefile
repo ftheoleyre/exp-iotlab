@@ -289,12 +289,13 @@ build-all-openwsn: build-openwsn-m3 build-openwsn-sink-m3 build-openwsn-sim
 #OPTIONS 
 OPENWSN_PREOPT_SIM = board=python toolchain=gcc 
 OPENWSN_PREOPT_EXP = board=iot-lab_M3 toolchain=armgcc 
-OPENWSN_OPTIONS = printf=1 tracks=3 sf=2 schedalgo=1 cex_period=3000 apps=cexample oos_openwsn
+OPENWSN_OPTIONS_SIM = printf=1 tracks=3 sf=2 schedalgo=1 cex_period=3000 panid=1 oos_openwsn
+OPENWSN_OPTIONS_EXP = printf=1 tracks=3 sf=2 schedalgo=1 cex_period=3000 panid=1 apps=cexample oos_openwsn
 
 
 build-openwsn-sim: ensure-openwsn-build-deps
 	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw \
-        && scons ${OPENWSN_PREOPT_SIM} ${OPENWSN} dagroot=0 fastsim=1  ${OPENWSN_OPTIONS} 
+        && scons ${OPENWSN_PREOPT_SIM} ${OPENWSN} dagroot=0 fastsim=1  ${OPENWSN_OPTIONS_SIM} 
 
 OPENWSN_SIM_OBJ=openwsn/openwsn-fw/firmware/openos/projects/common/oos_openwsn.so
 ensure-openwsn-sim: ${OPENWSN_SIM_OBJ}
@@ -316,11 +317,11 @@ openwsn/openwsn-fw-sink/projects/common/${OPENWSN_PROG}:
 #default
 build-openwsn-m3: ensure-openwsn-build-deps
 	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw \
-        && scons ${OPENWSN_PREOPT_EXP} ${OPENWSN} dagroot=0 ${OPENWSN_OPTIONS} 
+        && scons ${OPENWSN_PREOPT_EXP} ${OPENWSN} dagroot=0 ${OPENWSN_OPTIONS_EXP} 
 
 build-openwsn-sink-m3: ensure-openwsn-build-deps
 	${USE_OPENWSN_DEFS} && cd openwsn/openwsn-fw-sink \
-        && scons ${OPENWSN_PREOPT_EXP} ${OPENWSN} dagroot=1 ${OPENWSN_OPTIONS} 
+        && scons ${OPENWSN_PREOPT_EXP} ${OPENWSN} dagroot=1 ${OPENWSN_OPTIONS_EXP} 
 
 
 build-openwsn-a8-m3: ensure-openwsn-build-deps # not working
