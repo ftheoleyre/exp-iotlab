@@ -289,8 +289,9 @@ build-all-openwsn: build-openwsn-m3 build-openwsn-sink-m3 build-openwsn-sim
 #OPTIONS 
 OPENWSN_PREOPT_SIM = board=python toolchain=gcc 
 OPENWSN_PREOPT_EXP = board=iot-lab_M3 toolchain=armgcc 
-OPENWSN_OPTIONS_SIM = printf=1 tracks=3 sf=2 schedalgo=1 cex_period=3000 panid=1 oos_openwsn
-OPENWSN_OPTIONS_EXP = printf=1 tracks=3 sf=2 schedalgo=1 cex_period=3000 panid=1 apps=cexample oos_openwsn
+OPENWSN_OPTIONS_SIM = printf=1 stat=1 cex_period=3000 panid=101 oos_openwsn
+OPENWSN_OPTIONS_EXP = printf=1 stat=1 cex_period=3000 panid=101 oos_openwsn
+#OPENWSN_OPTIONS_EXP = printf=1 stat=1 cex_period=3000 panid=1 apps=cexample oos_openwsn
 
 
 build-openwsn-sim: ensure-openwsn-build-deps
@@ -327,7 +328,8 @@ build-openwsn-sink-m3: ensure-openwsn-build-deps
 build-openwsn-a8-m3: ensure-openwsn-build-deps # not working
 
 run-openwsn-sim: ensure-openwsn-sim ensure-openwsn-build-deps
-	cd openwsn/openwsn-sw/software/openvisualizer && sudo scons runweb --sim --simCount=6 --simTopology=linear 
+	cd openwsn/openwsn-sw/software/openvisualizer && sudo scons runweb --sim --simCount=6  
+#--simTopology=linear 
 
 run-openwsn-web: ensure-openwsn-build-deps
 	cd openwsn/openwsn-sw/software/openvisualizer && sudo scons runweb
